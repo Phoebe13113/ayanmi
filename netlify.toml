@@ -1,0 +1,53 @@
+# Netlify 配置文件 - 宠物领养平台
+
+[build]
+  # 构建命令
+  command = "npm run build"
+
+  # 构建输出目录
+  publish = "dist"
+
+  # Node 版本
+  [build.environment]
+    NODE_VERSION = "20"
+
+# 环境变量配置
+[context.production.environment]
+  # Supabase 配置
+  VITE_SUPABASE_URL = "https://brhhuzixaiqntkdiuccw.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyaGh1eml4YWlxbnRrZGl1Y2N3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4NDM2MjQsImV4cCI6MjA3ODQxOTYyNH0.kcdMsdG96ZkqAJ-Ul73X0s06lK6hZdlKTi1XPcTDpQA"
+
+# Deploy Preview 环境变量（部署预览）
+[context.deploy-preview.environment]
+  VITE_SUPABASE_URL = "https://brhhuzixaiqntkdiuccw.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyaGh1eml4YWlxbnRrZGl1Y2N3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4NDM2MjQsImV4cCI6MjA3ODQxOTYyNH0.kcdMsdG96ZkqAJ-Ul73X0s06lK6hZdlKTi1XPcTDpQA"
+
+# Branch Deploy 环境变量（分支部署）
+[context.branch-deploy.environment]
+  VITE_SUPABASE_URL = "https://brhhuzixaiqntkdiuccw.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJyaGh1eml4YWlxbnRrZGl1Y2N3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4NDM2MjQsImV4cCI6MjA3ODQxOTYyNH0.kcdMsdG96ZkqAJ-Ul73X0s06lK6hZdlKTi1XPcTDpQA"
+
+# SPA 路由重定向配置（支持 Vue Router）
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# 自定义头部配置
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# 静态资源缓存
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# 插件配置（可选）
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
